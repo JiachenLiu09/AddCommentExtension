@@ -10,10 +10,10 @@ function activate(context) {
 exports.activate = activate;
 function getText(uri) {
     if (uri) {
-        let u = vscode.Uri.file(uri, true);
+        let u = vscode.Uri.file(uri);
         vscode.workspace.openTextDocument(u).then((document) => {
             let text = document.getText();
-            if(text) {
+            if (text) {
                 let editor = vscode.window.activeTextEditor;
                 if (editor) {
                     let l = editor.selection.active.line;
@@ -26,7 +26,6 @@ function getText(uri) {
         });
     }
 }
-
 function deactivate() { }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

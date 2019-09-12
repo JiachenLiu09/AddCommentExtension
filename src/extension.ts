@@ -1,16 +1,17 @@
+  
 import * as vscode from 'vscode';
-import { TextDecoder } from 'util';
 
-function activate(context) {
-    let disposable = vscode.commands.registerCommand('extension.addComment', () => {
-        vscode.window.showInputBox().then(result => getText(result));
-    });
-    context.subscriptions.push(disposable);
+export function activate(context: vscode.ExtensionContext) {
+	let disposable = vscode.commands.registerCommand('extension.addComment', () => {
+		vscode.window.showInputBox().then(result => getText(result));
+	});
+
+	context.subscriptions.push(disposable);
 }
-exports.activate = activate;
-function getText(uri) {
+
+function getText(uri : any) {
     if (uri) {
-        let u = vscode.Uri.file(uri, true);
+        let u = vscode.Uri.file(uri);
         vscode.workspace.openTextDocument(u).then((document) => {
             let text = document.getText();
             if(text) {
@@ -27,5 +28,5 @@ function getText(uri) {
     }
 }
 
-function deactivate() { }
-exports.deactivate = deactivate;
+
+export function deactivate() {}
