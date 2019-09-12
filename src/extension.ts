@@ -1,11 +1,27 @@
 import * as vscode from 'vscode';
+import { TextDecoder } from 'util';
 
 export function activate(context: vscode.ExtensionContext) {
+
 	let disposable = vscode.commands.registerCommand('extension.addComment', () => {
-		vscode.window.showInputBox().then(result => addComment(result));
+		vscode.window.showInputBox().then(result => addComment(getText('file://' + result)));
 	});
 
 	context.subscriptions.push(disposable);
+}
+
+function getText(uri : any) {
+	if(uri) {
+		let u = vscode.Uri.parse(uri, true);
+		console.log(u);
+		let text;
+		vscode.workspace.openTextDocument(u).then((document) => {
+			console.log(document);
+			text = document.getText();
+		});
+		console.log(text);
+		return text;
+	}
 }
 
 function addComment(contain : any) {
