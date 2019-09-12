@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 function activate(context) {
     let disposable = vscode.commands.registerCommand('extension.addComment', () => {
-        vscode.window.showInputBox().then(result => getText(result));
+        vscode.window.showInputBox().then(result => addComment(result));
     });
     context.subscriptions.push(disposable);
 }
 exports.activate = activate;
-function getText(uri) {
+function addComment(uri) {
     if (uri) {
         let u = vscode.Uri.file(uri);
         vscode.workspace.openTextDocument(u).then((document) => {
